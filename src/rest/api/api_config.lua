@@ -15,6 +15,8 @@ local wifi = require('network.wlanconfig')
 local accessManager = require('util.access')
 local printerAPI = require('rest.api.api_printer')
 
+local MOD_ABBR = "ACFG"
+
 local M = {
 	isApi = true
 }
@@ -55,7 +57,7 @@ function M._global_GET(request, response)
 end
 
 function M._global_POST(request, response)
-	--log:info("API:config:set")
+	--log:info(MOD_ABBR, "API:config:set")
 
 	if not operationsAccessOrFail(request, response) then return end
 
@@ -63,14 +65,14 @@ function M._global_POST(request, response)
 
 	local validation = {}
 	for k,v in pairs(request:getAll()) do
-		--log:info("  "..k..": "..v);
+		--log:info(MOD_ABBR, "  "..k..": "..v);
 		local r,m = settings.set(k, v, true)
 
 		if r then
 			validation[k] = "ok"
 		elseif r == false then
 			validation[k] = "could not save setting ('" .. m .. "')"
-			log:info("  m: "..utils.dump(m))
+			log:info(MOD_ABBR, "  m: "..utils.dump(m))
 		elseif r == nil then
 			settings.commit()
 			response:setError(m)
@@ -82,7 +84,7 @@ function M._global_POST(request, response)
 
 	local substitutedSsid = wifi.getSubstitutedSsid(settings.get('network.ap.ssid'))
 	response:addData("substituted_ssid",substitutedSsid)
-	
+
 	local substitutedWiFiBoxID = wifi.getSubstitutedSsid(settings.get('network.cl.wifiboxid'))
 	response:addData("substituted_wifiboxid",substitutedWiFiBoxID)
 end
@@ -107,12 +109,12 @@ end
 -- and printer.type is set to 'ultimaker' then
 -- only the printer.startcode under the ultimaker subsection is removed.
 function M.reset_POST(request, response)
-	--log:info("API:reset");
+	--log:info(MOD_ABBR, "API:reset");
 	if not operationsAccessOrFail(request, response) then return end
 	response:setSuccess()
 
 	for k,v in pairs(request:getAll()) do
-		--log:info("  "..k..": "..v);
+		--log:info(MOD_ABBR, "  "..k..": "..v);
 		local r,m = settings.reset(k);
 		if r ~= nil then
 			response:addData(k, "ok")
