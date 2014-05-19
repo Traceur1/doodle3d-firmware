@@ -8,7 +8,7 @@
 -- USAGE:
 -- The only dependency of this script is the penlight library, which can be installed using
 -- LuaRocks (http://luarocks.org/) as follows: 'sudo luarocks install penlight'.
--- This script will automatically locate the Doodle3D repo's. 
+-- This script will automatically locate the Doodle3D repo's.
 -- Index files are fetched from the online repository.
 -- For synchronizing, rsync must have passwordless SSH access to the server, for a
 -- guide, see: http://www.linuxproblem.org/art_9.html.
@@ -20,8 +20,8 @@
 --        HostName ftp.greenhost.nl
 -- Some basic sanity checks are built in (unique version, updated release notes, 'clean' openwrt config)
 -- but lots others are still missing (mainly: clean git repo's, freshly built images).
--- The script must be run from within the openwrt build root. So it's handy to create a symlink 
--- to this file. You could to something like from the build root: 
+-- The script must be run from within the openwrt build root. So it's handy to create a symlink
+-- to this file. You could to something like from the build root:
 -- ln -s ~/wrt-wifibox-feed/doodle3d-firmware/extra/scripts/publish-wifibox-release.lua .
 -- Then you can start with:
 -- cd trunk ../publish-wifibox-release.lua
@@ -36,6 +36,7 @@
 -- could of course mirror the online repository.
 --
 -- TODO (in random order):
+-- * (feature) refuse to release image with same hash/date as existing released image
 -- * (feature) command-line arguments: overrides, verbosity, allow local mirroring, clear local cache dir, etc.
 -- * (feature) automatically create a backup of the online repo (there's already a script fir this, as mentioned above)
 -- * (feature) check whether git repo's are clean and on correct branch
