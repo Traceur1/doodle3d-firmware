@@ -1,9 +1,10 @@
 --
 -- This file is part of the Doodle3D project (http://doodle3d.com).
 --
--- @copyright 2013, Doodle3D
+-- @copyright 2013-2014, Doodle3D
 -- @license This software is licensed under the terms of the GNU GPL v2 or later.
 -- See file LICENSE.txt or visit http://www.gnu.org/licenses/gpl.html for full license details.
+
 
 -- TODO: return errors like in print_POST (error message in a 'msg' key instead of directly in the response) if this does not break API compatibility
 

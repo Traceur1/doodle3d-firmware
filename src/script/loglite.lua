@@ -1,4 +1,12 @@
 #!/usr/bin/env lua
+--
+-- This file is part of the Doodle3D project (http://doodle3d.com).
+--
+-- @copyright 2013-2014, Doodle3D
+-- @license This software is licensed under the terms of the GNU GPL v2 or later.
+-- See file LICENSE.txt or visit http://www.gnu.org/licenses/gpl.html for full license details.
+
+
 
 -- Notes
 -- * directives: either a color, a color prefixed by 'b' or one of: _delete, _nodelete, [_matchonly]
