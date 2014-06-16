@@ -7,7 +7,6 @@
 -- See file LICENSE.txt or visit http://www.gnu.org/licenses/gpl.html for full license details.
 
 
-
 -- Notes
 -- * directives: either a color, a color prefixed by 'b' or one of: _delete, _nodelete, [_matchonly]
 -- * pattern rules are matched top to bottom, the last one encountered overriding any previous conflicting directive

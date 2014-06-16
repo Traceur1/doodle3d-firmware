@@ -89,6 +89,44 @@ function M._global_POST(request, response)
 	response:addData("substituted_wifiboxid",substitutedWiFiBoxID)
 end
 
+function M.system_GET(request, response)
+	log:verbose(MOD_ABBR, "API:config/system(get)")
+	response:setSuccess()
+
+	for k,v in pairs(request:getAll()) do
+		local r,m = settings.getSystemKey(k)
+
+		if r ~= nil then
+			response:addData(k, r)
+		else
+			response:addData(k, "could not read key ('" .. m .. "')")
+			response:setError(m)
+			return
+		end
+	end
+end
+
+function M.system_POST(request, response)
+	log:verbose(MOD_ABBR, "API:config/system(post)")
+	if not operationsAccessOrFail(request, response) then return end
+	response:setSuccess()
+
+	local validation = {}
+	for k,v in pairs(request:getAll()) do
+		log:verbose(MOD_ABBR, "  about to set system key '"..k.."' -> '"..v.."'");
+		local r,m = settings.setSystemKey(k, v, true)
+
+		if r then
+			validation[k] = "ok"
+		elseif r == false then
+			validation[k] = "could not save system key ('" .. m .. "')"
+			log:info(MOD_ABBR, "  failed to set system key '"..k.."' ("..utils.dump(m)..")")
+		end
+	end
+
+	settings.commit()
+end
+
 function M.all_GET(request, response)
 	local allSettings, msg = settings.getAll();
 	if allSettings then
