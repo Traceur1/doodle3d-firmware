@@ -11,7 +11,6 @@ local lfs = require('lfs')
 local log = require('util.logger')
 local utils = require('util.utils')
 local settings = require('util.settings')
-local printDriver = require('print3d')
 local printerUtils = require('util.printer')
 local accessManager = require('util.access')
 
@@ -178,6 +177,7 @@ end
 --accepts: start(bool) (only when this argument is true will printing be started)
 --accepts: seq_number(int) (sequence number of the chunk, must be given until clear() after given once, and incremented each time)
 --accepts: seq_total(int) (total number of gcode chunks to be appended, must be given until clear() after given once, and stay the same)
+--returns: when the gcode buffer cannot accept the gcode, or the IPC transaction fails, a fail with a (formal, i.e., parseable) status argument will be returned
 function M.print_POST(request, response)
 	log:info(MOD_ABBR, "API:printer/print")
 
